@@ -5,8 +5,7 @@ import (
 	"strings"
 )
 
-// TODO: document this function.
-// PrefixToInfix converts
+// PrefixToInfix converts string with an expression in prefix form to a string with an expression in infix (regular) form
 func PrefixToInfix(input string) (string, error) {
 	var stack []string
 	const operators = "+-*/"
