@@ -3,26 +3,58 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
+	"os"
+	"strings"
 
 	lab2 "github.com/roman-mazur/architecture-lab-2"
 )
 
 var (
-	inputExpression = flag.String("e", "", "Expression to compute")
-	// TODO: Add other flags support for input and output configuration.
+	flagE = flag.String("e", "", "Expression to compute")
+	flagF = flag.String("f", "", "Input file")
+	flagO = flag.String("o", "", "Output file")
 )
 
 func main() {
 	flag.Parse()
 
-	// TODO: Change this to accept input from the command line arguments as described in the task and
-	//       output the results using the ComputeHandler instance.
-	//       handler := &lab2.ComputeHandler{
-	//           Input: {construct io.Reader according the command line parameters},
-	//           Output: {construct io.Writer according the command line parameters},
-	//       }
-	//       err := handler.Compute()
+	var input io.Reader = nil
+	var output = os.Stdout
 
-	res, _ := lab2.PrefixToInfix("+ 2 2")
-	fmt.Println(res)
+	if *flagE != "" {
+		input = strings.NewReader(*flagE)
+	} 
+
+	if *flagF != "" {
+		f, err := os.Open(*flagF)
+		if err != nil {
+			fmt.Println("Error")
+		}
+		input = f
+	}
+
+	if *flagO != "" {
+		f, err := os.Create(*flagO)
+		if err != nil {
+			fmt.Println("Error")
+		}
+		output = f
+	} 
+
+	if input == nil {
+		fmt.Println("No stdIn defined")
+		return 
+	} 
+	
+	handler := &lab2.ComputeHandler {
+		Input: input,
+		Output: output,
+	}
+	err := handler.Compute()
+	if err != nil {
+		fmt.Println(err.Error());
+	}
 }
+
+

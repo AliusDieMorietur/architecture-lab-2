@@ -11,26 +11,21 @@ func PrefixToInfix(input string) (string, error) {
 	const operators = "+-*/"
 
 	if len(input) == 0 {
-		return "", fmt.Errorf("Empty string")
+		return "", fmt.Errorf("empty string")
 	}
-
-	// fmt.Println("input string: ", input)
 
 	var inputs = strings.Split(input, " ")
 
-	var literal = "" // Current character (number or operator)
-	var e1 = ""      // first top value from stack
-	var e2 = ""      // second
+	var literal = "" 
+	var e1 = ""      
+	var e2 = ""      
 
-	// Go from right to left
 	for i := len(inputs) - 1; i >= 0; i-- {
 		literal = inputs[i]
 
 		if !strings.Contains(operators, literal) {
 			stack = append(stack, literal)
 		} else {
-
-			// Если в стеке не хватает элементов, значит опратор не в нужном месте (или лишний)
 			if len(stack) < 2 {
 				return "", fmt.Errorf("Wrong Expression: " + input)
 			}
@@ -38,7 +33,6 @@ func PrefixToInfix(input string) (string, error) {
 			e1, stack = Pop(stack)
 			e2, stack = Pop(stack)
 
-			// Поставить скобочки, если надо (если не надо, не ставить)
 			if strings.Contains(e1, " ") && strings.Contains("*/", literal) {
 				e1 = "(" + e1 + ")"
 			}
@@ -49,8 +43,6 @@ func PrefixToInfix(input string) (string, error) {
 			var new = e1 + " " + literal + " " + e2
 			stack = append(stack, new)
 		}
-
-		// fmt.Println(stack)
 	}
 
 	var res = ""
