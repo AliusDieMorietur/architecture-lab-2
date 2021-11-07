@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -24,12 +23,12 @@ func main() {
 
 	if *flagE != "" {
 		input = strings.NewReader(*flagE)
-	} 
+	}
 
 	if *flagF != "" {
 		f, err := os.Open(*flagF)
 		if err != nil {
-			fmt.Println("Error")
+			os.Stderr.WriteString("Error")
 		}
 		input = f
 	}
@@ -37,24 +36,22 @@ func main() {
 	if *flagO != "" {
 		f, err := os.Create(*flagO)
 		if err != nil {
-			fmt.Println("Error")
+			os.Stderr.WriteString("Error")
 		}
 		output = f
-	} 
+	}
 
 	if input == nil {
-		fmt.Println("No stdIn defined")
-		return 
-	} 
-	
-	handler := &lab2.ComputeHandler {
-		Input: input,
+		os.Stderr.WriteString("No stdIn defined")
+		return
+	}
+
+	handler := &lab2.ComputeHandler{
+		Input:  input,
 		Output: output,
 	}
 	err := handler.Compute()
 	if err != nil {
-		fmt.Println(err.Error());
+		os.Stderr.WriteString(err.Error())
 	}
 }
-
-
