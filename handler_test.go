@@ -20,30 +20,26 @@ import (
 // }
 
 func (s *MySuite) TestComputeHandler(c *C) {
-	b:= bytes.NewBuffer(make([]byte, 0))
+	b := bytes.NewBuffer(make([]byte, 0))
 
-	handler := ComputeHandler {
-		Input: strings.NewReader("+ 2 2"),
+	handler := ComputeHandler{
+		Input:  strings.NewReader("+ 2 2"),
 		Output: b,
 	}
 	err := handler.Compute()
 
 	c.Assert(err, Equals, nil)
-	c.Assert(b.String(), Equals, "2 + 2")
+	c.Assert(b.String(), Equals, "2 + 2 broken test")
 }
 
-
 func (s *MySuite) TestComputeHandlerError(c *C) {
-	b:= bytes.NewBuffer(make([]byte, 0))
+	b := bytes.NewBuffer(make([]byte, 0))
 
-	handler := ComputeHandler {
-		Input: strings.NewReader("23 22"),
+	handler := ComputeHandler{
+		Input:  strings.NewReader("23 22"),
 		Output: b,
 	}
 	err := handler.Compute()
 
 	c.Assert(err, NotNil)
 }
-
-
-
