@@ -11,7 +11,7 @@ func PrefixToInfix(input string) (string, error) {
 	const operators = "+-*/"
 
 	if len(input) == 0 {
-		return "", fmt.Errorf("empty string")
+		return "", fmt.Errorf("Empty string")
 	}
 
 	var inputs = strings.Split(input, " ")
