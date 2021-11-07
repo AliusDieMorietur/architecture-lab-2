@@ -26,6 +26,7 @@ func (ch *ComputeHandler) Compute() error {
 	result, err := PrefixToInfix(string(s))
 	if err != nil {
 		fmt.Println(err);
+		return err
 	}
 	ch.Output.Write([]byte(result))
 	return nil
