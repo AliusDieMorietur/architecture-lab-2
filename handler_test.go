@@ -29,7 +29,7 @@ func (s *MySuite) TestComputeHandler(c *C) {
 	err := handler.Compute()
 
 	c.Assert(err, Equals, nil)
-	c.Assert(b.String(), Equals, "2 + 2 broken test")
+	c.Assert(b.String(), Equals, "2 + 2")
 }
 
 func (s *MySuite) TestComputeHandlerError(c *C) {
