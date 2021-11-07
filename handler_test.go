@@ -36,7 +36,7 @@ func (s *MySuite) TestComputeHandlerError(c *C) {
 	b := bytes.NewBuffer(make([]byte, 0))
 
 	handler := ComputeHandler{
-		Input:  strings.NewReader("23 22"),
+		Input:  strings.NewReader("23 22 broke another test"),
 		Output: b,
 	}
 	err := handler.Compute()
