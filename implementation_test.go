@@ -25,7 +25,7 @@ var _ = Suite(&MySuite{})
 // }
 
 func (s *MySuite) TestPrefixToInfixDefault(c *C) {
-	res, err := PrefixToInfix("+ 5 * - 4 2 3")
+	res, err := PrefixToInfix("+ 5 * - 4 2 32222")
 
 	c.Assert(err, Equals, nil)
 	c.Assert(res, Equals, "5 + (4 - 2) * 3")
