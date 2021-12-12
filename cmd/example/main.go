@@ -30,6 +30,7 @@ func main() {
 		if err != nil {
 			os.Stderr.WriteString("Error")
 		}
+		defer f.Close()
 		input = f
 	}
 
@@ -38,6 +39,7 @@ func main() {
 		if err != nil {
 			os.Stderr.WriteString("Error")
 		}
+		defer f.Close()
 		output = f
 	}
 
