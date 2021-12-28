@@ -2,6 +2,7 @@ package lab2
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	. "gopkg.in/check.v1"
@@ -25,7 +26,7 @@ var _ = Suite(&MySuite{})
 // }
 
 func (s *MySuite) TestPrefixToInfixDefault(c *C) {
-	res, err := PrefixToInfix("+ 5 * - 4 2 32222")
+	res, err := PrefixToInfix("+ 5 * - 4 2 3")
 
 	c.Assert(err, Equals, nil)
 	c.Assert(res, Equals, "5 + (4 - 2) * 3")
@@ -87,4 +88,21 @@ func ExamplePrefixToInfix() {
 
 	// Output:
 	// (2 + 5 - 8) * (101 - 36 / 6)
+}
+
+var cntRes string
+
+func BenchmarkPrefixToInfix(b *testing.B) {
+	var l = 1000
+	for i := 1; i < 20; i++ {
+		var s = strings.Repeat("+ ", l)
+		s += strings.Repeat("2 ", l)
+		s += "2"
+
+		b.Run(fmt.Sprintf("len=%d", l), func(b *testing.B) {
+			cntRes, _ = PrefixToInfix(s)
+		})
+
+		l = int(float32(l) * 1.2)
+	}
 }
