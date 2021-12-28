@@ -24,10 +24,10 @@ func BenchmarkPrefixToInfix(b *testing.B) {
 }
 ```
 
-![name](./Screenshots/rgr_screen_lab2 (2).png)
+![name](./Screenshots/rgr_screen_lab2_1.png)
 
 
-![name](./Screenshots/rgr_screen_lab2 (1).png)  
+![name](./Screenshots/rgr_screen_lab2_2.png)  
 
 Час росте пропорційно довжині строки, а графік нагадує пряму. Робимо висновок, що час виконання функції є лінійним.  
 
